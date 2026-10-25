@@ -2,106 +2,198 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MAFIOSO-STORE Montepuez</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0a0a;color:#fff;font-family:Arial}
 .top{position:sticky;top:0;z-index:20;background:#111;padding:10px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #222}
-.url{flex:1;background:#232323;border-radius:20px;padding:8px 14px;font-size:12px}
+.url{flex:1;background:#232323;border-radius:20px;padding:8px 14px;font-size:11px}
+.banner-vermelho{background:#ff0040;padding:14px 12px;text-align:left;border-bottom:4px solid #000}
+.banner-vermelho h1{display:inline-block;background:#111;color:#ff0040;padding:6px 14px;font-size:14px;font-weight:900;border-radius:6px;letter-spacing:0.5px}
+.banner-vermelho p{color:#ffeb00;font-size:12px;margin-top:6px;font-weight:bold}
 .sec{padding:14px 0 14px 12px}
-.sec h2{font-size:15px;margin-bottom:10px;padding-left:8px;border-left:4px solid #ff0040}
+.sec h2{font-size:14px;margin-bottom:10px;padding-left:8px;border-left:4px solid #ff0040}
 .grid{display:flex;gap:12px;overflow-x:auto;padding-right:12px;padding-bottom:6px}
 .grid::-webkit-scrollbar{display:none}
 .card{min-width:168px;max-width:168px;background:#1a1a1a;border-radius:14px;overflow:hidden;border:1px solid #2a2a2a;flex-shrink:0;position:relative}
-.badge{position:absolute;top:8px;left:8px;background:#ff0040;color:#fff;font-size:8px;font-weight:900;padding:4px 8px;border-radius:12px;z-index:2}
-.img{height:170px;background:#ddd;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:zoom-in}
+.badge{position:absolute;top:8px;left:8px;background:#ff0040;color:#fff;font-size:7px;font-weight:900;padding:4px 7px;border-radius:10px;z-index:2}
+.img{height:170px;background:#e5e5e5;display:flex;align-items:center;justify-content:center;cursor:zoom-in;overflow:hidden}
 .img img{width:100%;height:100%;object-fit:cover}
-.card h3{font-size:12px;padding:8px 8px 4px;height:32px;overflow:hidden}
-.preco{color:#ff0040;font-weight:900;padding:0 8px;font-size:15px}
-.old{color:#888;font-size:11px;text-decoration:line-through;padding:0 8px 6px}
-.btnAdd{width:92%;margin:6px 4% 10px;background:#ff0040;color:#fff;border:none;border-radius:20px;padding:10px;font-weight:bold;font-size:12px}
+.card h3{font-size:11px;padding:7px 8px 3px;height:32px;overflow:hidden;line-height:13px}
+.preco{color:#ff0040;font-weight:900;padding:0 8px;font-size:14px}
+.old{color:#888;font-size:10px;text-decoration:line-through;padding:0 8px 4px}
+.btnAdd{width:92%;margin:5px 4% 9px;background:#ff0040;color:#fff;border:none;border-radius:18px;padding:9px;font-weight:bold;font-size:11px;cursor:pointer}
 #productModal{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:200;display:none}
 .modalContent{max-width:430px;margin:0 auto;background:#111;min-height:100vh}
-.modalImgWrap{height:75vh;background:#000;display:flex;align-items:center;justify-content:center;position:relative}
-.modalImgWrap img{max-width:100%;max-height:100%;object-fit:contain;transition:transform 0.3s}
-.modalImgWrap img.zoomed{transform:scale(2.5)}
-.closeModal{position:absolute;top:12px;right:12px;background:#fff;color:#111;border:none;width:36px;height:36px;border-radius:50%;font-size:18px;font-weight:bold}
-.modalInfo{padding:16px}
-.modalBtns{display:flex;gap:10px;margin-top:14px}
-.btnWhats{flex:1;background:#25D366;color:#fff;border:none;border-radius:12px;padding:14px;font-weight:bold}
-.btnCart{flex:1;background:#ff0040;color:#fff;border:none;border-radius:12px;padding:14px;font-weight:bold}
-.nav{position:fixed;bottom:0;left:0;right:0;background:#111;display:flex;justify-content:space-around;padding:8px 0 10px;border-top:1px solid #222;max-width:430px;margin:0 auto;z-index:30}
+.modalImgWrap{height:72vh;background:#000;display:flex;align-items:center;justify-content:center;position:relative}
+.modalImgWrap img{max-width:100%;max-height:100%;object-fit:contain;transition:transform .2s}
+.modalImgWrap img.zoomed{transform:scale(2.3)}
+.closeModal{position:absolute;top:10px;right:10px;background:#fff;color:#111;border:none;width:34px;height:34px;border-radius:50%;font-weight:bold}
+.modalInfo{padding:14px}
+.modalBtns{display:flex;gap:8px;margin-top:12px}
+.btnWhats{flex:1;background:#25D366;color:#fff;border:none;border-radius:10px;padding:12px;font-weight:bold}
+.btnCart{flex:1;background:#ff0040;color:#fff;border:none;border-radius:10px;padding:12px;font-weight:bold}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#111;display:flex;justify-content:space-around;padding:8px 0;border-top:1px solid #222;max-width:430px;margin:0 auto;z-index:30}
 .app{max-width:430px;margin:0 auto;padding-bottom:70px}
 #adminPanel{position:fixed;inset:0;background:#0a0a0a;z-index:300;display:none;overflow:auto}
-.adminHead{background:#111;padding:14px;display:flex;justify-content:space-between;position:sticky;top:0}
+.adminHead{background:#111;padding:14px;display:flex;justify-content:space-between;position:sticky;top:0;z-index:10}
 .adminCard{background:#1e1e1e;margin:10px;border-radius:14px;padding:14px;border:1px solid #333}
 .inp{width:100%;padding:12px;border:1px solid #333;border-radius:10px;margin-bottom:8px;background:#2a2a2a;color:#fff}
-.btnAdmin{width:100%;background:#00c853;color:#fff;border:none;border-radius:10px;padding:12px;font-weight:bold;margin-top:6px}
+.btnAdmin{width:100%;background:#00c853;color:#fff;border:none;border-radius:10px;padding:12px;font-weight:bold;margin-top:6px;cursor:pointer}
 .loginBox{max-width:320px;margin:80px auto;background:#1e1e1e;padding:24px;border-radius:16px;text-align:center}
-.previewWrap{display:flex;gap:8px;flex-wrap:wrap}
-.previewBox{width:70px;height:70px;border-radius:10px;overflow:hidden;background:#2a2a2a;border:2px solid #00c853}
+.previewWrap{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.previewBox{width:62px;height:62px;border-radius:8px;overflow:hidden;background:#2a2a2a;border:2px solid #00c853;position:relative}
 .previewBox img{width:100%;height:100%;object-fit:cover}
+.myPhotoBox{width:90px;height:90px;border-radius:50%;overflow:hidden;background:#333;margin:0 auto 10px;border:3px solid #ff0040}
+.myPhotoBox img{width:100%;height:100%;object-fit:cover}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="top"><span>🏠</span><div class="url">🔒 mafioso-store.mz • Montepuez • 871585269</div><span>78</span></div>
+<div class="top"><span>🏠</span><div class="url">🔒 mafioso-store.mz • Montepuez • 871585269</div></div>
+<div class="banner-vermelho">
+<h1>MAFIOSO-STORE MONTEPUEZ</h1>
+<p>👉 Desliza pro lado pra ver os produtos 👈</p>
+</div>
+<div id="storePhotoArea" style="padding:12px;text-align:center;background:#111;border-bottom:1px solid #222;display:none">
+<div class="myPhotoBox" id="myPhotoBox"></div>
+<p style="font-size:11px;color:#888">Loja oficial Montepuez</p>
+</div>
 <div id="allSections"></div>
-<div style="text-align:center;padding:20px 12px;color:#555;font-size:11px">Admin: <u onclick="abrirAdmin()" style="color:#ff0040">clique aqui</u> • WhatsApp 871585269</div>
+<div style="text-align:center;padding:18px;color:#555;font-size:10px">
+Admin: <u onclick="abrirAdmin()" style="color:#ff0040">clique aqui</u> • 871585269
+</div>
 </div>
 <div class="nav">
 <div style="color:#ff0040">🏠<br>Accueil</div>
-<div>🔍<br>Catégorie</div>
-<div>🛒<br>Panier <span id="cartCount" style="background:#ff0040;color:#fff;border-radius:50%;padding:2px 6px;font-size:9px;display:none">0</span></div>
-<div onclick="abrirAdmin()">👤<br>Compte</div>
+<div style="color:#888">🔍<br>Catégorie</div>
+<div style="color:#888">🛒<br>Panier <span id="cartCount" style="background:#ff0040;color:#fff;border-radius:50%;padding:2px 5px;font-size:8px;display:none">0</span></div>
+<div style="color:#888" onclick="abrirAdmin()">👤<br>Compte</div>
 </div>
-<div id="productModal" onclick="if(event.target===this) fecharModal()">
+<div id="productModal" onclick="if(event.target===this)fecharModal()">
 <div class="modalContent">
 <div class="modalImgWrap"><button class="closeModal" onclick="fecharModal()">✕</button><img id="modalImg" src="" onclick="this.classList.toggle('zoomed')"></div>
-<div class="modalInfo"><h2 id="modalNome"></h2><div class="preco" id="modalPreco"></div><div class="old" id="modalOld"></div><p style="font-size:12px;color:#aaa;margin-top:10px">📍 Montepuez - Toque na imagem para ampliar</p><div class="modalBtns"><button class="btnCart" onclick="adicionarDoModal()">🛒 Adicionar</button><button class="btnWhats" onclick="comprarWhatsModal()">💬 WhatsApp</button></div></div>
+<div class="modalInfo"><h2 id="modalNome"></h2><div class="preco" id="modalPreco"></div><div class="old" id="modalOld"></div><p style="font-size:11px;color:#aaa;margin-top:8px">📍 Montepuez - Toque na imagem para ampliar / zoom</p><div class="modalBtns"><button class="btnCart" onclick="adicionarDoModal()">Adicionar</button><button class="btnWhats" onclick="comprarWhatsModal()">WhatsApp</button></div></div>
 </div>
 </div>
-<div id="adminPanel"><div class="adminHead"><h2>ADMIN AUTOMÁTICO</h2><button onclick="fecharAdmin()" style="background:#fff;color:#111;border:none;border-radius:8px;padding:8px 16px;font-weight:bold">X</button></div><div id="loginDiv" class="loginBox"><h3>🔒 Acesso</h3><input id="passInput" type="password" class="inp" placeholder="Digite sua senha"><button class="btnAdmin" onclick="fazerLogin()">ENTRAR</button></div><div id="adminContent" style="display:none"><div class="adminCard"><h3>➕ Publicar na Horizontal</h3><input type="file" id="fileInput" accept="image/*" multiple class="inp"><div id="previewWrap" class="previewWrap"></div><div id="statusMsg" style="padding:8px;border-radius:8px;margin:6px 0;text-align:center;font-size:12px;display:none"></div><input id="pNome" class="inp" placeholder="Nome: ex Montre Connectée Sport"><input id="pPreco" class="inp" type="number" placeholder="Preço atual: ex 2450"><input id="pOld" class="inp" type="number" placeholder="Preço antigo: ex 4000"><button id="btnPublicar" class="btnAdmin" onclick="publicarAuto()">📤 PUBLICAR AUTOMATICAMENTE NA HORIZONTAL</button></div><div class="adminCard"><h3>📦 Produtos (<span id="countProd">0</span>)</h3><div id="adminList"></div><button class="btnAdmin" style="background:#ff0040" onclick="resetar()">🗑️ Resetar</button></div></div></div>
+<div id="adminPanel">
+<div class="adminHead"><h2>ADMIN</h2><button onclick="fecharAdmin()" style="background:#fff;color:#111;border:none;border-radius:8px;padding:8px 14px;font-weight:bold">X</button></div>
+<div id="loginDiv" class="loginBox"><h3>🔒 Acesso</h3><input id="passInput" type="password" class="inp" placeholder="Senha"><button class="btnAdmin" onclick="fazerLogin()">ENTRAR</button></div>
+<div id="adminContent" style="display:none">
+<div class="adminCard">
+<h3>🖼️ Minha Foto / Logo da Loja</h3>
+<input type="file" id="myPhotoInput" accept="image/*" class="inp">
+<div class="myPhotoBox" id="myPhotoPreview" style="margin-top:8px"></div>
+<button class="btnAdmin" style="background:#ff0040" onclick="salvarMinhaFoto()">💾 Salvar Minha Foto no Topo</button>
+<button class="btnAdmin" style="background:#555" onclick="removerMinhaFoto()">Remover Foto</button>
+</div>
+<div class="adminCard">
+<h3>➕ Publicar na Horizontal - ULTRA RÁPIDO</h3>
+<p style="font-size:10px;color:#888;margin-bottom:6px">Agora publica em 1 segundo! Fotos grandes OK, já comprime automático.</p>
+<input type="file" id="fileInput" accept="image/*" multiple class="inp">
+<div id="previewWrap" class="previewWrap"></div>
+<div id="statusMsg" style="padding:8px;border-radius:8px;margin:6px 0;text-align:center;font-size:12px;display:none"></div>
+<input id="pNome" class="inp" placeholder="Nome: ex Camisa m-comprida">
+<input id="pPreco" class="inp" type="number" placeholder="Preço: ex 750">
+<input id="pOld" class="inp" type="number" placeholder="Preço antigo (opcional)">
+<button id="btnPublicar" class="btnAdmin" onclick="publicarAuto()">📤 PUBLICAR AGORA - SEM DEMORA</button>
+<button class="btnAdmin" style="background:#555;margin-top:8px" onclick="limparMemoria()">🧹 Limpar memória antiga (fica rápido)</button>
+</div>
+<div class="adminCard"><h3>📦 Produtos (<span id="countProd">0</span>)</h3><div id="adminList"></div><button class="btnAdmin" style="background:#ff0040" onclick="resetar()">🗑️ Resetar Tudo</button></div>
+</div>
+</div>
 <script>
-var products = JSON.parse(localStorage.getItem('mafioso_v9_horizontal')||'null');
-if(!products){products=[{n:"Montre Connectée Sport",p:2450,o:4000,emoji:"⌚",cat:"Delgados"},{n:"Sac à Dos Voyage",p:1629,o:2500,emoji:"🎒",cat:"Delgados"},{n:"Clavier RGB + Souris",p:2849,o:4200,emoji:"⌨️",cat:"More to love - Montepuez"}];}
-var cart = JSON.parse(localStorage.getItem('mafioso_cart_v9')||'[]');var curImgs=[];var modalIndex=0;
-function salvar(){localStorage.setItem('mafioso_v9_horizontal',JSON.stringify(products));}
-function salvarCart(){localStorage.setItem('mafioso_cart_v9',JSON.stringify(cart));atualizarCart();}
+var products=JSON.parse(localStorage.getItem('mafioso_final_v12')||'null');
+if(!products){products=[{n:"Montre Connectée Sport",p:2450,o:4000,cat:"Delgados"},{n:"Sac à Dos Voyage",p:1629,o:2500,cat:"Delgados"},{n:"Mini Camisa",p:429,o:650,cat:"Delgados"},{n:"Clavier RGB + Souris",p:2849,o:4200,cat:"More to love - Montepuez"}];}
+var cart=JSON.parse(localStorage.getItem('mafioso_cart_final')||'[]');
+var curImgs=[];var modalIndex=0;var myPhotoData=null;
+var savedPhoto=localStorage.getItem('mafioso_my_photo');
+if(savedPhoto){myPhotoData=savedPhoto;}
+function salvar(){try{localStorage.setItem('mafioso_final_v12',JSON.stringify(products));return true;}catch(e){alert('❌ Memória cheia! Clique em Limpar memória. Feche as abas do Chrome também!');document.getElementById('btnPublicar').innerText='📤 PUBLICAR AGORA - SEM DEMORA';document.getElementById('btnPublicar').disabled=false;return false;}}
+function salvarCart(){localStorage.setItem('mafioso_cart_final',JSON.stringify(cart));atualizarCart();}
 function render(){
-var container=document.getElementById('allSections');container.innerHTML='';
-var grupos={};products.forEach(function(pr,idx){if(!grupos[pr.cat])grupos[pr.cat]=[];grupos[pr.cat].push({pr:pr,idx:idx});});
-Object.keys(grupos).forEach(function(cat){
-var html='<div class="sec"><h2>'+cat+'</h2><div class="grid">';
-grupos[cat].forEach(function(item){
-var pr=item.pr;var imgContent=pr.img?'<img src="'+pr.img+'" loading="lazy">':'<span style="color:#999;font-weight:bold">Foto</span>';
-html+='<div class="card"><span class="badge">MONTEPUEZ</span><div class="img" onclick="abrirModal('+item.idx+')">'+imgContent+'</div><h3>'+pr.n+'</h3><div class="preco">'+pr.p+' MT</div><div class="old">'+(pr.o?pr.o+' MT':'')+'</div><button class="btnAdd" onclick="adicionar('+item.idx+')">Adicionar</button></div>';
-});html+='</div></div>';container.innerHTML+=html;
-});
-document.getElementById('countProd').innerText=products.length;
-var list=document.getElementById('adminList');list.innerHTML='';
-products.forEach(function(pr,i){
-var thumb=pr.img?'<img src="'+pr.img+'" style="width:50px;height:50px;object-fit:cover;border-radius:8px">':'<div style="font-size:28px;width:50px;text-align:center">'+pr.emoji+'</div>';
-list.innerHTML+='<div style="display:flex;gap:8px;background:#2a2a2a;border-radius:10px;padding:8px;align-items:center;margin-bottom:6px">'+thumb+'<div style="flex:1"><b style="font-size:11px">'+pr.n+'</b><br><span style="color:#ff2d55;font-size:11px">'+pr.p+' MT</span></div><button onclick="apagar('+i+')" style="background:#ff0040;color:#fff;border:none;border-radius:6px;padding:6px 10px">X</button></div>';
-});
+ var container=document.getElementById('allSections');container.innerHTML='';
+ var grupos={};products.forEach(function(pr,idx){if(!grupos[pr.cat])grupos[pr.cat]=[];grupos[pr.cat].push({pr:pr,idx:idx});});
+ Object.keys(grupos).forEach(function(cat){
+  var html='<div class="sec"><h2>'+cat+'</h2><div class="grid">';
+  grupos[cat].forEach(function(item){
+   var pr=item.pr;var imgContent=pr.img?'<img src="'+pr.img+'" loading="lazy">':'<span style="color:#999;font-size:12px">Foto</span>';
+   html+='<div class="card"><span class="badge">MONTEPUEZ</span><div class="img" onclick="abrirModal('+item.idx+')">'+imgContent+'</div><h3>'+pr.n+'</h3><div class="preco">'+pr.p+' MT</div><div class="old">'+(pr.o?pr.o+' MT':'')+'</div><button class="btnAdd" onclick="adicionar('+item.idx+')">Adicionar</button></div>';
+  });
+  html+='</div></div>';container.innerHTML+=html;
+ });
+ document.getElementById('countProd').innerText=products.length;
+ var list=document.getElementById('adminList');list.innerHTML='';
+ products.forEach(function(pr,i){
+  var thumb=pr.img?'<img src="'+pr.img+'" style="width:50px;height:50px;object-fit:cover;border-radius:6px">':'<div style="width:50px;text-align:center">👕</div>';
+  list.innerHTML+='<div style="display:flex;gap:8px;background:#2a2a2a;border-radius:10px;padding:8px;align-items:center;margin-bottom:6px">'+thumb+'<div style="flex:1"><b style="font-size:11px">'+pr.n+'</b><br><span style="color:#ff2d55;font-size:11px">'+pr.p+' MT</span></div><button onclick="apagar('+i+')" style="background:#ff0040;color:#fff;border:none;border-radius:6px;padding:6px 10px">X</button></div>';
+ });
+ var area=document.getElementById('storePhotoArea');
+ var box=document.getElementById('myPhotoBox');
+ var prev=document.getElementById('myPhotoPreview');
+ if(myPhotoData){
+  area.style.display='block';
+  box.innerHTML='<img src="'+myPhotoData+'">';
+  prev.innerHTML='<img src="'+myPhotoData+'">';
+ }else{
+  area.style.display='none';
+  prev.innerHTML='';
+ }
 }
 function abrirModal(i){modalIndex=i;var pr=products[i];document.getElementById('modalImg').src=pr.img||'';document.getElementById('modalImg').classList.remove('zoomed');document.getElementById('modalNome').innerText=pr.n;document.getElementById('modalPreco').innerText=pr.p+' MT';document.getElementById('modalOld').innerText=pr.o?pr.o+' MT':'';document.getElementById('productModal').style.display='block';document.body.style.overflow='hidden';}
 function fecharModal(){document.getElementById('productModal').style.display='none';document.body.style.overflow='';}
-function adicionar(i){cart.push(products[i]);salvarCart();alert('✅ '+products[i].n+' adicionado!');}
+function adicionar(i){cart.push(products[i]);salvarCart();alert('✅ Adicionado!');}
 function adicionarDoModal(){adicionar(modalIndex);fecharModal();}
-function comprarWhatsModal(){var pr=products[modalIndex];var txt='Olá MAFIOSO-STORE Montepuez! Quero: '+pr.n+' - '+pr.p+' MT';window.open('https://wa.me/258871585269?text='+encodeURIComponent(txt),'_blank');}
-function abrirCart(){if(cart.length===0){alert('Panier vazio!');return;}var txt='Olá MAFIOSO-STORE! Quero pedir:%0A%0A';var tot=0;cart.forEach(function(p,i){txt+=(i+1)+'. '+p.n+' - '+p.p+' MT%0A';tot+=p.p;});txt+='%0ATotal: '+tot+' MT';window.open('https://wa.me/258871585269?text='+encodeURIComponent(txt),'_blank');}
+function comprarWhatsModal(){var pr=products[modalIndex];window.open('https://wa.me/258871585269?text='+encodeURIComponent('Olá MAFIOSO-STORE Montepuez! Quero: '+pr.n+' - '+pr.p+' MT'),'_blank');}
 function atualizarCart(){var el=document.getElementById('cartCount');if(cart.length>0){el.style.display='inline';el.innerText=cart.length;}else{el.style.display='none';}}
 function abrirAdmin(){document.getElementById('adminPanel').style.display='block';}
 function fecharAdmin(){document.getElementById('adminPanel').style.display='none';}
 function fazerLogin(){var s=document.getElementById('passInput').value;var k='bWFmaW9zbzIwMjU=';if(btoa(s)===k){document.getElementById('loginDiv').style.display='none';document.getElementById('adminContent').style.display='block';}else{alert('Senha errada!');}}
-function mostrarStatus(msg,ok){var el=document.getElementById('statusMsg');el.innerText=msg;el.style.display='block';el.style.background=ok?'#00c853':'#ff0040';el.style.color='#fff';setTimeout(function(){el.style.display='none';},2500);}
-function comprimirImagem(file,cb){var r=new FileReader();r.onload=function(e){var img=new Image();img.onload=function(){var c=document.createElement('canvas');var MAX=800;var w=img.width,h=img.height;if(w>h){if(w>MAX){h=h*MAX/w;w=MAX;}}else{if(h>MAX){w=w*MAX/h;h=MAX;}}c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);cb(c.toDataURL('image/jpeg',0.75));};img.src=e.target.result;};r.readAsDataURL(file);}
-document.getElementById('fileInput').addEventListener('change',function(e){var files=Array.from(e.target.files);curImgs=[];var wrap=document.getElementById('previewWrap');wrap.innerHTML='';var loaded=0;mostrarStatus('⏳ Comprimindo '+files.length+' foto(s)...',true);files.forEach(function(f){comprimirImagem(f,function(url){curImgs.push(url);var d=document.createElement('div');d.className='previewBox';d.innerHTML='<img src="'+url+'">';wrap.appendChild(d);loaded++;if(loaded===files.length){mostrarStatus('✅ '+loaded+' pronta(s)!',true);}});});});
-function publicarAuto(){var nome=document.getElementById('pNome').value.trim()||'Produto Montepuez';var p=parseInt(document.getElementById('pPreco').value);var o=parseInt(document.getElementById('pOld').value)||Math.round(p*1.6);if(!p){mostrarStatus('❌ Digita preço!',false);return;}if(curImgs.length===0){mostrarStatus('❌ Escolhe foto!',false);return;}var btn=document.getElementById('btnPublicar');btn.innerText='⏳ PUBLICANDO...';btn.disabled=true;setTimeout(function(){var qtd=curImgs.length;curImgs.forEach(function(img,i){var n=qtd>1?nome+' '+(i+1):nome;products.unshift({n:n,p:p,o:o,img:img,emoji:'👕',cat:'Delgados'});});salvar();render();document.getElementById('pNome').value='';document.getElementById('pPreco').value='';document.getElementById('pOld').value='';curImgs=[];document.getElementById('previewWrap').innerHTML='';document.getElementById('fileInput').value='';mostrarStatus('✅ '+qtd+' publicado(s)!',true);alert('✅ '+qtd+' produto(s) na horizontal!');fecharAdmin();btn.innerText='📤 PUBLICAR AUTOMATICAMENTE NA HORIZONTAL';btn.disabled=false;},300);}
-function apagar(i){if(confirm('Apagar '+products[i].n+'?')){products.splice(i,1);salvar();render();}}
-function resetar(){if(confirm('Resetar tudo?')){localStorage.removeItem('mafioso_v9_horizontal');location.reload();}}
+function comprimir(file, max, qual, cb){
+ var r=new FileReader();
+ r.onload=function(e){
+  var img=new Image();
+  img.onload=function(){
+   var c=document.createElement('canvas');
+   var w=img.width,h=img.height;
+   if(w>h){if(w>max){h=h*max/w;w=max;}}else{if(h>max){w=w*max/h;h=max;}}
+   c.width=w;c.height=h;
+   c.getContext('2d').drawImage(img,0,0,w,h);
+   cb(c.toDataURL('image/jpeg',qual));
+  };
+  img.src=e.target.result;
+ };
+ r.readAsDataURL(file);
+}
+document.getElementById('myPhotoInput').addEventListener('change',function(e){
+ var file=e.target.files[0];if(!file)return;
+ comprimir(file,200,0.7,function(url){myPhotoData=url;document.getElementById('myPhotoPreview').innerHTML='<img src="'+url+'">';});
+});
+function salvarMinhaFoto(){
+ if(!myPhotoData){alert('Escolhe foto primeiro!');return;}
+ try{localStorage.setItem('mafioso_my_photo',myPhotoData);render();alert('✅ Sua foto salva no topo!');}catch(err){alert('Foto muito grande! Escolhe outra menor.');}
+}
+function removerMinhaFoto(){localStorage.removeItem('mafioso_my_photo');myPhotoData=null;render();alert('Foto removida');}
+document.getElementById('fileInput').addEventListener('change',function(e){
+ var files=Array.from(e.target.files);curImgs=[];var wrap=document.getElementById('previewWrap');wrap.innerHTML='';
+ files.forEach(function(f){
+  comprimir(f,300,0.5,function(url){curImgs.push(url);var d=document.createElement('div');d.className='previewBox';d.innerHTML='<img src="'+url+'">';wrap.appendChild(d);});
+ });
+});
+function publicarAuto(){
+ var nome=document.getElementById('pNome').value.trim()||'Produto';var p=parseInt(document.getElementById('pPreco').value);var o=parseInt(document.getElementById('pOld').value)||0;
+ if(!p){alert('Digita preço!');return;}
+ if(curImgs.length===0){alert('Escolhe foto!');return;}
+ var btn=document.getElementById('btnPublicar');btn.innerText='⏳ PUBLICANDO...';btn.disabled=true;
+ var qtd=curImgs.length;
+ curImgs.forEach(function(img,i){var n=qtd>1?nome+' '+(i+1):nome;products.unshift({n:n,p:p,o:o||Math.round(p*1.6),img:img,cat:'Delgados'});});
+ if(salvar()){render();document.getElementById('pNome').value='';document.getElementById('pPreco').value='';document.getElementById('pOld').value='';curImgs=[];document.getElementById('previewWrap').innerHTML='';document.getElementById('fileInput').value='';alert('✅ '+qtd+' publicado(s) em 1 segundo!');fecharAdmin();}
+ btn.innerText='📤 PUBLICAR AGORA - SEM DEMORA';btn.disabled=false;
+}
+function apagar(i){if(confirm('Apagar?')){products.splice(i,1);salvar();render();}}
+function resetar(){if(confirm('Resetar tudo?')){localStorage.removeItem('mafioso_final_v12');location.reload();}}
+function limparMemoria(){if(confirm('Limpar memória antiga pra ficar rápido?')){localStorage.removeItem('mafioso_v9_horizontal');localStorage.removeItem('mafioso_auto_v8');localStorage.removeItem('mafioso_auto_final');localStorage.removeItem('mafioso_ultra_fast');alert('✅ Limpo! Agora vai rápido!');render();}}
 render();atualizarCart();
 </script>
 </body>
