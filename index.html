@@ -79,3 +79,211 @@ body{font-family:Arial;background:#0f0f0f;color:#fff}
 </div>
 <div id="allSections"></div>
 </div>
+<div class="nav">
+<div class="ativo">🏠<br>Accueil</div>
+<div onclick="openCart()">🛒<br>Panier<span id="cartBadge" class="cart-badge">0</span></div>
+<div onclick="window.open('https://wa.me/'+getWA()+'?text=Olá Montepuez!','_blank')" style="color:#25D366">💬<br>WhatsApp</div>
+<div onclick="openAdmin()" style="color:#ff0040">⚙️<br>Admin</div>
+</div>
+
+<div id="adminPanel">
+<div class="adminHead">
+<h2>🔧 ADMIN MAFIOSO-STORE</h2>
+<button onclick="closeAdmin()" style="background:#fff;color:#111;border:none;border-radius:8px;padding:8px 16px;font-weight:bold">X</button>
+</div>
+
+<div id="loginDiv" class="loginBox">
+<div style="font-size:40px">🔒</div>
+<h3>Acesso Admin</h3>
+<p style="font-size:12px;color:#777;margin:8px 0 16px">Montepuez<br>Área restrita</p>
+<input id="passInput" type="password" class="inp" placeholder="Digite sua senha">
+<div id="errorBox" class="errorMsg">❌ Senha incorreta! Tente novamente.</div>
+<button class="btnAdmin btnGreen" onclick="doLogin()">Entrar</button>
+</div>
+
+<div id="adminContent" style="display:none">
+<div class="adminCard">
+<h3>➕ Publicar - Várias Fotos + Categorias</h3>
+<input type="file" id="fileInput" accept="image/*" multiple class="inp">
+<div id="previewWrap" class="previewWrap"></div>
+<input id="pNome" class="inp" placeholder="Nome (ex: Calça Jeans)">
+<input id="pPreco" class="inp" type="number" placeholder="Preço MT">
+<input id="pOld" class="inp" type="number" placeholder="Preço antigo (opcional)">
+<label style="font-size:14px;color:#ff0040;font-weight:bold">📂 CATEGORIA:</label>
+<select id="pCat" class="inp" style="border:2px solid #ff0040;font-weight:bold;font-size:16px;margin-top:6px">
+<option value="CALÇAS">👖 CALÇAS</option>
+<option value="CALCINHAS">🩲 CALCINHAS</option>
+<option value="CALÇÕES">🩳 CALÇÕES</option>
+<option value="COLAR">📿 COLAR</option>
+<option value="COLARES">📿 COLARES</option>
+<option value="CAMISA">👕 CAMISA</option>
+<option value="CAMISA MANGA COMPRIDA">👔 CAMISA MANGA COMPRIDA</option>
+<option value="BOXER">🩲 BOXER</option>
+<option value="BIQUINI">👙 BIQUINI</option>
+<option value="VESTIDOS">👗 VESTIDOS</option>
+<option value="SAIA">👗 SAIA</option>
+<option value="TOP">🎽 TOP</option>
+<option value="MAIS OUTRAS ROUPAS">👚 MAIS OUTRAS ROUPAS</option>
+</select>
+<button class="btnAdmin btnGreen" onclick="addProduct()">📤 PUBLICAR TODAS</button>
+</div>
+
+<div class="adminCard">
+<h3>📦 Produtos (<span id="countProd">0</span>)</h3>
+<div id="adminList"></div>
+<button class="btnAdmin" style="background:#ff0040;margin-top:12px" onclick="resetAll()">🗑️ Resetar Tudo</button>
+<button class="btnAdmin" style="background:#333;color:#fff;margin-top:6px" onclick="clearStorage()">🧹 Limpar Cache Antigo</button>
+</div>
+
+<div class="adminCard">
+<h3>⚙️ Config</h3>
+<input id="waInput" class="inp" value="258871585269">
+<button class="btnAdmin waBtn" onclick="saveWA()">💾 Salvar WhatsApp</button>
+<button class="btnAdmin" style="background:#25D366;margin-top:6px" onclick="testWA()">💬 Testar</button>
+<input id="newPass" type="password" class="inp" placeholder="Nova senha" style="margin-top:12px">
+<input id="newPass2" type="password" class="inp" placeholder="Confirmar">
+<button class="btnAdmin" onclick="changePass()">🔑 Trocar Senha</button>
+<button class="btnAdmin" style="background:#333;color:#fff;margin-top:8px" onclick="logout()">🚪 Sair</button>
+</div>
+</div>
+</div>
+
+<script>
+const CATS = ["CALÇAS","CALCINHAS","CALÇÕES","COLAR","COLARES","CAMISA","CAMISA MANGA COMPRIDA","BOXER","BIQUINI","VESTIDOS","MAIS OUTRAS ROUPAS"];
+const BASE = "https://adriano-naulangue.github.io/MAFIOSO-STORE/";
+let products = JSON.parse(localStorage.getItem('mafioso_final_v5')||'null');
+if(!products){
+products = [
+{n:"Calça Jeans Skinny Montepuez",p:950,o:1500,img:BASE+"1792941850992.jpg",cat:"CALÇAS"},
+{n:"Calcinha Cotton Montepuez",p:150,o:300,img:BASE+"1792941854357.jpg",cat:"CALCINHAS"},
+{n:"Calção Jeans Montepuez",p:750,o:1200,img:BASE+"1792941856740.jpg",cat:"CALÇÕES"},
+{n:"Colar Dourado",p:350,o:600,img:BASE+"1792941859770.jpg",cat:"COLAR"},
+{n:"Camisa Básica",p:550,o:900,img:BASE+"1792941862302.jpg",cat:"CAMISA"},
+{n:"Camisa Manga Comprida",p:850,o:1300,img:BASE+"1792941865085.jpg",cat:"CAMISA MANGA COMPRIDA"},
+{n:"Boxer Cotton 3 Unid",p:650,o:1000,img:BASE+"1792941868250.jpg",cat:"BOXER"},
+{n:"Biquini Montepuez",p:850,o:1200,img:BASE+"1792941874565.jpg",cat:"BIQUINI"}
+];
+}
+let cart = JSON.parse(localStorage.getItem('mafioso_cart_v5')||'[]');
+let curImgs = [];
+let currentFilter = 'all';
+function save(){localStorage.setItem('mafioso_final_v5',JSON.stringify(products));}
+function saveCart(){localStorage.setItem('mafioso_cart_v5',JSON.stringify(cart));updBadge();}
+function render(){
+const container = document.getElementById('allSections');
+container.innerHTML = '';
+let catsToShow = currentFilter==='all'?CATS:[currentFilter];
+catsToShow.forEach(cat=>{
+let filtered = products.filter(p=>p.cat===cat);
+let html = '<div class="sec"><h2>'+cat+' '+(currentFilter!=='all'?'':'('+filtered.length+')')+'</h2><div class="grid">';
+if(filtered.length===0){
+html += '<p style="color:#555;padding:10px">Nenhum produto em '+cat+' ainda. Publique no Admin!</p>';
+}else{
+filtered.forEach(pr=>{
+const real = products.indexOf(pr);
+html += '<div class="card"><div class="img"><span class="badge">'+pr.cat+'</span><img src="'+pr.img+'"></div><h3>'+pr.n+'</h3><div class="preco">'+pr.p+' MT</div><div class="old">'+pr.o+' MT</div><button class="btn" onclick="addCart('+real+')">Adicionar</button></div>';
+});
+}
+html += '</div></div>';
+container.innerHTML += html;
+});
+document.getElementById('countProd').innerText = products.length;
+renderAdmin();
+}
+function filterCat(c){currentFilter = c;render();}
+function renderAdmin(){
+const list = document.getElementById('adminList');
+list.innerHTML = '';
+products.forEach((pr,i)=>{
+list.innerHTML += '<div class="prodItemAdmin"><img src="'+pr.img+'"><div style="flex:1"><b style="font-size:11px">'+pr.n+'</b><br><span style="font-size:10px;background:#ff0040;color:#fff;padding:2px 6px;border-radius:6px">'+pr.cat+'</span> <span style="font-size:11px;color:#ff2d55">'+pr.p+' MT</span></div><button class="btnS edit" onclick="editP('+i+')">Edit</button><button class="btnS del" onclick="delP('+i+')">X</button></div>';
+});
+}
+function addCart(i){cart.push(products[i]);saveCart();if(confirm(products[i].n+" ("+products[i].cat+")\nAdicionado! Ir WhatsApp?"))openCart();}
+function updBadge(){const b = document.getElementById('cartBadge');if(cart.length>0){b.style.display='flex';b.innerText=cart.length;}else b.style.display='none';}
+function getWA(){return localStorage.getItem('mafioso_wa')||'258871585269';}
+function openCart(){
+if(cart.length==0){alert("Panier vazio!");return;}
+let txt = "Olá MAFIOSO-STORE Montepuez! Quero pedir:%0A%0A";let tot = 0;
+cart.forEach((p,i)=>{txt += (i+1)+'. '+p.n+' ('+p.cat+') - '+p.p+' MT%0A';tot += p.p;});
+txt += '%0ATotal: '+tot+' MT%0AEntrega: Montepuez';
+window.open('https://wa.me/'+getWA()+'?text='+txt,'_blank');
+}
+function openAdmin(){document.getElementById('adminPanel').style.display='block';}
+function closeAdmin(){document.getElementById('adminPanel').style.display='none';}
+function doLogin(){
+const pass = document.getElementById('passInput').value;
+const saved = localStorage.getItem('mafioso_pass_final')||'mafioso2025';
+const err = document.getElementById('errorBox');
+if(pass===saved){
+err.style.display='none';
+document.getElementById('loginDiv').style.display='none';
+document.getElementById('adminContent').style.display='block';
+document.getElementById('waInput').value=getWA();
+}else{err.style.display='block';document.getElementById('passInput').value='';}
+}
+function saveWA(){
+const wa = document.getElementById('waInput').value.replace(/\D/g,'');
+if(wa.length<9){alert("Número inválido");return;}
+localStorage.setItem('mafioso_wa',wa);alert("WhatsApp salvo: "+wa);
+}
+function testWA(){window.open('https://wa.me/'+getWA()+'?text=Olá Teste Montepuez','_blank');}
+function changePass(){
+const np = document.getElementById('newPass').value;
+const np2 = document.getElementById('newPass2').value;
+if(np.length<4){alert("Senha curta");return;}
+if(np!==np2){alert("Senhas não coincidem!");return;}
+localStorage.setItem('mafioso_pass_final',np);
+alert("✅ Senha trocada!");
+document.getElementById('newPass').value='';document.getElementById('newPass2').value='';
+}
+function logout(){document.getElementById('adminContent').style.display='none';document.getElementById('loginDiv').style.display='block';document.getElementById('passInput').value='';}
+document.getElementById('fileInput').addEventListener('change',e=>{
+const files = Array.from(e.target.files);curImgs = [];
+const wrap = document.getElementById('previewWrap');wrap.innerHTML = '';
+files.forEach(file=>{
+const r = new FileReader();
+r.onload = ev=>{
+curImgs.push(ev.target.result);
+const div = document.createElement('div');div.className = 'previewBox';
+div.innerHTML = '<img src="'+ev.target.result+'">';
+wrap.appendChild(div);
+};
+r.readAsDataURL(file);
+});
+});
+function addProduct(){
+const baseName = document.getElementById('pNome').value||"Produto Montepuez";
+const p = parseInt(document.getElementById('pPreco').value);
+const o = parseInt(document.getElementById('pOld').value)||Math.round((p||1000)*1.6);
+let cat = document.getElementById('pCat').value;
+if(!p){alert("Digite o preço!");return;}
+if(curImgs.length===0){alert("Escolha pelo menos uma foto!");return;}
+curImgs.forEach((img,idx)=>{
+const name = curImgs.length>1?baseName+' '+(idx+1):baseName;
+products.unshift({n:name,p,o,img,cat:cat});
+});
+save();render();
+document.getElementById('pNome').value='';document.getElementById('pPreco').value='';document.getElementById('pOld').value='';
+curImgs = [];document.getElementById('previewWrap').innerHTML='';document.getElementById('fileInput').value='';
+alert('✅ '+cat+' publicado!');
+}
+function delP(i){if(confirm("Apagar "+products[i].n+"?")){products.splice(i,1);save();render();}}
+function editP(i){
+const pr = products[i];
+const nn = prompt("Novo nome:",pr.n);if(nn===null)return;
+const pp = prompt("Novo preço MT:",pr.p);
+const cc = prompt("Categoria: CALÇAS, CALCINHAS, CALÇÕES, COLAR, CAMISA, CAMISA MANGA COMPRIDA, BOXER",pr.cat);
+products[i].n = nn||pr.n;products[i].p = parseInt(pp)||pr.p;products[i].cat = cc||pr.cat;save();render();
+}
+function resetAll(){if(confirm("Resetar tudo?")){localStorage.removeItem('mafioso_final_v5');location.reload();}}
+function clearStorage(){
+if(confirm("Limpar cache antigo?")){
+localStorage.removeItem('mafioso_final');localStorage.removeItem('mafioso_marcas');localStorage.removeItem('mafioso_cats');
+localStorage.removeItem('mafioso_cart_final');localStorage.removeItem('mafioso_cart_marcas');
+alert("Cache limpo!");location.reload();
+}
+}
+render();updBadge();
+</script>
+</body>
+</html>
