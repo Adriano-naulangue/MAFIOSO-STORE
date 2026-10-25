@@ -76,3 +76,242 @@ body{background:#0f0f0f;color:#fff;font-family:Arial}
 <div onclick="abrirWhats()" style="color:#25D366">💬<br>WhatsApp</div>
 <div onclick="abrirAdmin()" style="color:#ff0040">⚙️<br>Admin</div>
 </div>
+<div id="adminPanel">
+<div class="adminHead"><h2>🔧 ADMIN</h2><button onclick="fecharAdmin()" style="background:#fff;color:#111;border:none;border-radius:8px;padding:8px 16px;font-weight:bold">X FECHAR</button></div>
+
+<div id="loginDiv" class="loginBox">
+<div style="font-size:40px">🔒</div>
+<h3>Acesso Admin</h3>
+<input id="passInput" type="password" class="inp" placeholder="Senha: mafioso2025">
+<button class="btnAdmin btnGreen" onclick="fazerLogin()">ENTRAR</button>
+<p style="font-size:11px;color:#777;margin-top:8px">Senha padrão: mafioso2025</p>
+</div>
+
+<div id="adminContent" style="display:none">
+<div class="adminCard">
+<h3>➕ Publicar - Horizontal</h3>
+<input type="file" id="fileInput" accept="image/*" multiple class="inp">
+<div id="previewWrap" class="previewWrap"></div>
+<input id="pNome" class="inp" placeholder="Nome do produto">
+<input id="pPreco" class="inp" type="number" placeholder="Preço MT">
+<input id="pOld" class="inp" type="number" placeholder="Preço antigo (opcional)">
+
+<label style="color:#ff0040;font-weight:bold">📂 Categoria (desliza pro lado):</label>
+<div class="catWrap">
+<button type="button" class="catBtn active" onclick="escolherCat('CALÇAS')" id="btn-CALÇAS">👖 CALÇAS</button>
+<button type="button" class="catBtn" onclick="escolherCat('CALCINHAS')" id="btn-CALCINHAS">🩲 CALCINHAS</button>
+<button type="button" class="catBtn" onclick="escolherCat('CALÇÕES')" id="btn-CALÇÕES">🩳 CALÇÕES</button>
+<button type="button" class="catBtn" onclick="escolherCat('BOXER')" id="btn-BOXER">🩲 BOXER</button>
+<button type="button" class="catBtn" onclick="escolherCat('CAMISA')" id="btn-CAMISA">👕 CAMISA</button>
+<button type="button" class="catBtn" onclick="escolherCat('CAMISA MANGA COMPRIDA')" id="btn-CAMISA MANGA COMPRIDA">👔 M/COMPRIDA</button>
+<button type="button" class="catBtn" onclick="escolherCat('COLAR')" id="btn-COLAR">📿 COLAR</button>
+<button type="button" class="catBtn" onclick="escolherCat('BIQUINI')" id="btn-BIQUINI">👙 BIQUINI</button>
+</div>
+<input type="hidden" id="pCat" value="CALÇAS">
+<div id="catSelected" style="background:#ff0040;color:#fff;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin:8px 0">👖 CALÇAS selecionada</div>
+
+<button class="btnAdmin btnGreen" onclick="publicar()">📤 PUBLICAR</button>
+</div>
+<div id="adminPanel">
+<div class="adminHead"><h2>🔧 ADMIN</h2><button onclick="fecharAdmin()" style="background:#fff;color:#111;border:none;border-radius:8px;padding:8px 16px;font-weight:bold">X FECHAR</button></div>
+
+<div id="loginDiv" class="loginBox">
+<div style="font-size:40px">🔒</div>
+<h3>Acesso Admin</h3>
+<input id="passInput" type="password" class="inp" placeholder="Senha: mafioso2025">
+<button class="btnAdmin btnGreen" onclick="fazerLogin()">ENTRAR</button>
+<p style="font-size:11px;color:#777;margin-top:8px">Senha padrão: mafioso2025</p>
+</div>
+
+<div id="adminContent" style="display:none">
+<div class="adminCard">
+<h3>➕ Publicar - Horizontal</h3>
+<input type="file" id="fileInput" accept="image/*" multiple class="inp">
+<div id="previewWrap" class="previewWrap"></div>
+<input id="pNome" class="inp" placeholder="Nome do produto">
+<input id="pPreco" class="inp" type="number" placeholder="Preço MT">
+<input id="pOld" class="inp" type="number" placeholder="Preço antigo (opcional)">
+
+<label style="color:#ff0040;font-weight:bold">📂 Categoria (desliza pro lado):</label>
+<div class="catWrap">
+<button type="button" class="catBtn active" onclick="escolherCat('CALÇAS')" id="btn-CALÇAS">👖 CALÇAS</button>
+<button type="button" class="catBtn" onclick="escolherCat('CALCINHAS')" id="btn-CALCINHAS">🩲 CALCINHAS</button>
+<button type="button" class="catBtn" onclick="escolherCat('CALÇÕES')" id="btn-CALÇÕES">🩳 CALÇÕES</button>
+<button type="button" class="catBtn" onclick="escolherCat('BOXER')" id="btn-BOXER">🩲 BOXER</button>
+<button type="button" class="catBtn" onclick="escolherCat('CAMISA')" id="btn-CAMISA">👕 CAMISA</button>
+<button type="button" class="catBtn" onclick="escolherCat('CAMISA MANGA COMPRIDA')" id="btn-CAMISA MANGA COMPRIDA">👔 M/COMPRIDA</button>
+<button type="button" class="catBtn" onclick="escolherCat('COLAR')" id="btn-COLAR">📿 COLAR</button>
+<button type="button" class="catBtn" onclick="escolherCat('BIQUINI')" id="btn-BIQUINI">👙 BIQUINI</button>
+</div>
+<input type="hidden" id="pCat" value="CALÇAS">
+<div id="catSelected" style="background:#ff0040;color:#fff;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin:8px 0">👖 CALÇAS selecionada</div>
+
+<button class="btnAdmin btnGreen" onclick="publicar()">📤 PUBLICAR</button>
+</div>
+
+<div class="adminCard">
+<h3>📦 Produtos (<span id="countProd">0</span>)</h3>
+<div id="adminList"></div>
+<button class="btnAdmin" style="background:#ff0040;margin-top:12px" onclick="resetar()">🗑️ Resetar Produtos Padrão</button>
+<button class="btnAdmin" style="background:#333;color:#fff;margin-top:6px" onclick="limparTudo()">🧹 Limpar Tudo</button>
+</div>
+
+<div class="adminCard">
+<h3>⚙️ WhatsApp</h3>
+<input id="waInput" class="inp" value="258871585269">
+<button class="btnAdmin" style="background:#25D366;color:#fff" onclick="salvarWA()">💾 Salvar WhatsApp</button>
+</div>
+</div>
+</div>
+
+<script>
+var CATS=["CALÇAS","CALCINHAS","CALÇÕES","BOXER","CAMISA","CAMISA MANGA COMPRIDA","COLAR","BIQUINI"];
+var products=[
+{n:"Calça Jeans Skinny",p:950,o:1500,emoji:"👖",cat:"CALÇAS"},
+{n:"Calça Legging Preta",p:750,o:1200,emoji:"👖",cat:"CALÇAS"},
+{n:"Calcinha Cotton Kit 3",p:350,o:600,emoji:"🩲",cat:"CALCINHAS"},
+{n:"Calcinha Renda",p:180,o:350,emoji:"🩲",cat:"CALCINHAS"},
+{n:"Calção Jeans",p:650,o:1000,emoji:"🩳",cat:"CALÇÕES"},
+{n:"Boxer Cotton 3 Unid",p:650,o:1000,emoji:"🩲",cat:"BOXER"},
+{n:"Camisa Básica",p:550,o:900,emoji:"👕",cat:"CAMISA"},
+{n:"Camisa Manga Comprida",p:850,o:1300,emoji:"👔",cat:"CAMISA MANGA COMPRIDA"},
+{n:"Colar Dourado",p:350,o:600,emoji:"📿",cat:"COLAR"},
+{n:"Biquini Verão",p:850,o:1200,emoji:"👙",cat:"BIQUINI"}
+];
+var cart=[];
+var curImgs=[];
+var currentFilter='all';
+var selectedCat='CALÇAS';
+
+var savedProds=localStorage.getItem('mafioso_final_ok');
+if(savedProds){
+try{products=JSON.parse(savedProds);}catch(e){}
+}
+var savedCart=localStorage.getItem('mafioso_cart_ok');
+if(savedCart){
+try{cart=JSON.parse(savedCart);}catch(e){}
+}
+
+function salvar(){localStorage.setItem('mafioso_final_ok',JSON.stringify(products));}
+function salvarCart(){localStorage.setItem('mafioso_cart_ok',JSON.stringify(cart));atualizarBadge();}
+function escolherCat(c){
+selectedCat=c;
+document.getElementById('pCat').value=c;
+document.getElementById('catSelected').innerText='✅ '+c+' selecionada';
+var botoes=document.querySelectorAll('.catBtn');
+for(var i=0;i<botoes.length;i++){botoes[i].classList.remove('active');}
+var btn=document.getElementById('btn-'+c);
+if(btn){btn.classList.add('active');}
+}
+function render(){
+var container=document.getElementById('allSections');
+container.innerHTML='';
+var catsToShow=currentFilter==='all'?CATS:[currentFilter];
+for(var j=0;j<catsToShow.length;j++){
+var cat=catsToShow[j];
+var filtered=[];
+for(var k=0;k<products.length;k++){if(products[k].cat===cat){filtered.push(products[k]);}}
+if(currentFilter!=='all' && filtered.length===0){continue;}
+var html='<div class="sec"><h2>'+cat+' ('+filtered.length+')</h2><div class="grid">';
+if(filtered.length===0){
+html+='<p style="color:#666;padding:10px">Nenhum produto</p>';
+}else{
+for(var f=0;f<filtered.length;f++){
+var pr=filtered[f];
+var real=products.indexOf(pr);
+var imgContent=pr.img?'<img src="'+pr.img+'" style="width:100%;height:100%;object-fit:cover">':'<span>'+(pr.emoji||'👕')+'</span>';
+html+='<div class="card"><div class="img"><span class="badge">'+pr.cat+'</span>'+imgContent+'</div><h3>'+pr.n+'</h3><div class="preco">'+pr.p+' MT</div><div class="old">'+pr.o+' MT</div><button class="btn" onclick="addCart('+real+')">Adicionar</button></div>';
+}
+}
+html+='</div></div>';
+container.innerHTML+=html;
+}
+document.getElementById('countProd').innerText=products.length;
+renderAdmin();
+}
+function filterCat(c){currentFilter=c;render();}
+function renderAdmin(){
+var list=document.getElementById('adminList');
+list.innerHTML='';
+for(var i=0;i<products.length;i++){
+var pr=products[i];
+var icon=pr.emoji||'👕';
+if(pr.img){icon='<img src="'+pr.img+'" style="width:50px;height:50px;object-fit:cover;border-radius:8px">';}
+else{icon='<div style="font-size:30px;width:50px;text-align:center">'+icon+'</div>';}
+list.innerHTML+='<div class="adminItem">'+icon+'<div style="flex:1"><b style="font-size:11px">'+pr.n+'</b><br><span style="font-size:10px;background:#ff0040;color:#fff;padding:2px 6px;border-radius:6px">'+pr.cat+'</span> <span style="font-size:11px;color:#ff2d55">'+pr.p+' MT</span></div><button class="btnS del" onclick="apagar('+i+')">X</button></div>';
+}
+}
+function addCart(i){cart.push(products[i]);salvarCart();alert(products[i].n+' adicionado!');}
+function atualizarBadge(){var b=document.getElementById('cartBadge');if(cart.length>0){b.style.display='flex';b.innerText=cart.length;}else{b.style.display='none';}}
+function getWA(){var w=localStorage.getItem('mafioso_wa');return w?w:'258871585269';}
+function openCart(){
+if(cart.length==0){alert('Carrinho vazio!');return;}
+var txt='Olá MAFIOSO-STORE! Quero pedir:%0A%0A';var tot=0;
+for(var i=0;i<cart.length;i++){txt+=(i+1)+'. '+cart[i].n+' ('+cart[i].cat+') - '+cart[i].p+' MT%0A';tot+=cart[i].p;}
+txt+='%0ATotal: '+tot+' MT';
+window.open('https://wa.me/'+getWA()+'?text='+txt,'_blank');
+}
+function abrirWhats(){window.open('https://wa.me/'+getWA()+'?text=Olá','_blank');}
+function abrirAdmin(){
+console.log('Abrindo admin');
+document.getElementById('adminPanel').style.display='block';
+}
+function fecharAdmin(){document.getElementById('adminPanel').style.display='none';}
+function fazerLogin(){
+var pass=document.getElementById('passInput').value;
+var saved=localStorage.getItem('mafioso_pass')||'mafioso2025';
+if(pass===saved){
+document.getElementById('loginDiv').style.display='none';
+document.getElementById('adminContent').style.display='block';
+document.getElementById('waInput').value=getWA();
+}else{alert('Senha errada! Use: mafioso2025');}
+}
+function salvarWA(){
+var wa=document.getElementById('waInput').value;
+wa=wa.replace(/[^0-9]/g,'');
+localStorage.setItem('mafioso_wa',wa);
+alert('WhatsApp salvo: '+wa);
+}
+document.getElementById('fileInput').addEventListener('change',function(e){
+var files=Array.from(e.target.files);curImgs=[];
+var wrap=document.getElementById('previewWrap');wrap.innerHTML='';
+for(var i=0;i<files.length;i++){
+(function(file){
+var r=new FileReader();
+r.onload=function(ev){
+curImgs.push(ev.target.result);
+var div=document.createElement('div');div.className='previewBox';
+div.innerHTML='<img src="'+ev.target.result+'">';
+wrap.appendChild(div);
+};
+r.readAsDataURL(file);
+})(files[i]);
+}
+});
+function publicar(){
+var baseName=document.getElementById('pNome').value||'Produto Montepuez';
+var p=parseInt(document.getElementById('pPreco').value);
+var o=parseInt(document.getElementById('pOld').value)||Math.round((p||1000)*1.6);
+var cat=document.getElementById('pCat').value;
+if(!p){alert('Digite o preço!');return;}
+if(curImgs.length>0){
+for(var i=0;i<curImgs.length;i++){
+var name=curImgs.length>1?baseName+' '+(i+1):baseName;
+products.unshift({n:name,p:p,o:o,img:curImgs[i],emoji:'👕',cat:cat});
+}
+}else{
+products.unshift({n:baseName,p:p,o:o,emoji:'👕',cat:cat});
+}
+salvar();render();
+document.getElementById('pNome').value='';document.getElementById('pPreco').value='';document.getElementById('pOld').value='';
+curImgs=[];document.getElementById('previewWrap').innerHTML='';document.getElementById('fileInput').value='';
+alert('✅ '+cat+' publicado!');
+fecharAdmin();
+}
+function apagar(i){if(confirm('Apagar '+products[i].n+'?')){products.splice(i,1);salvar();render();}}
+function resetar(){if(confirm('Resetar para padrão?')){localStorage.removeItem('mafioso_final_ok');location.reload();}}
+function limparTudo(){if(confirm('Limpar tudo?')){localStorage.clear();location.reload();}}
+render();atualizarBadge();escolherCat('CALÇAS');
+</script>
+</body>
+</html>
