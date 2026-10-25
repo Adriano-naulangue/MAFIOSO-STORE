@@ -80,12 +80,33 @@ body{background:#000;color:#fff;font-family:Arial}
 <div id="allSections"></div>
 <div style="text-align:center;padding:14px;color:#555;font-size:9px">Admin: <u onclick="abrirAdmin()" style="color:#ff0040">clique aqui</u></div>
 </div>
-<div class="nav"><div style="color:#ff0040">🏠<br>Accueil</div><div style="color:#888">🔍<br>Catégorie</div><div style="color:#888">🛒<br>Panier <span id="cartCount" style="background:#ff0040;color:#fff;border-radius:50%;padding:2px 5px;font-size:8px;display:none">0</span></div><div style="color:#888" onclick="abrirAdmin()">⚙️
-<br>Compte</div></div>
+<div class="nav"><div style="color:#ff0040">🏠<br>Accueil</div><div style="color:#888">🔍<br>Catégorie</div><div style="color:#888">🛒<br>Panier <span id="cartCount" style="background:#ff0040;color:#fff;border-radius:50%;padding:2px 5px;font-size:8px;display:none">0</span></div><div style="color:#888" onclick="abrirAdmin()">👤<br>Compte</div></div>
 <div id="adminPanel"><div class="adminHead"><h2>ADMIN</h2><button onclick="fecharAdmin()" style="background:#fff;color:#111;border:none;border-radius:8px;padding:8px 14px;font-weight:bold">X</button></div>
 <div id="loginDiv" class="loginBox"><h3>🔒 Acesso</h3><input id="passInput" type="password" class="inp" placeholder="Senha"><button class="btnAdmin" onclick="fazerLogin()">ENTRAR</button></div>
 <div id="adminContent" style="display:none">
-<div class="adminCard" style="border-color:#00c853"><h3>➕ Publicar</h3><select id="pGrupo" class="sel"><option value="Camisa m-comprida">Camisa m-comprida</option><option value="Calças">Calças</option><option value="Calcinhas">Calcinhas</option><option value="Óculos">Óculos</option><option value="Vestidos">Vestidos</option><option value="Delgados">Delgados</option></select><input type="file" id="fileInput" accept="image/*" multiple class="inp"><div id="previewWrap" class="previewWrap"></div><input id="pNome" class="inp" placeholder="Nome"><input id="pPreco" class="inp" type="number" placeholder="Preço"><input id="pOld" class="inp" type="number" placeholder="Preço antigo"><button id="btnPublicar" class="btnAdmin" onclick="publicarAuto()">📤 PUBLICAR</button></div>
+<div class="adminCard" style="border-color:#00c853"><h3>➕ Publicar</h3>
+<select id="pGrupo" class="sel">
+<option value="Camisa m-comprida">👕 Camisa m-comprida</option>
+<option value="Camisa m-curta">👕 Camisa m-curta</option>
+<option value="Camisas">👕 Camisas</option>
+<option value="Calções">🩳 Calções</option>
+<option value="Calças">👖 Calças</option>
+<option value="Calcinhas">👙 Calcinhas</option>
+<option value="Colar">📿 Colar</option>
+<option value="Sapatos">👟 Sapatos</option>
+<option value="Saltos">👠 Saltos</option>
+<option value="Bermudas">🩳 Bermudas</option>
+<option value="Vestidos">👗 Vestidos</option>
+<option value="Saias">👗 Saias</option>
+<option value="Blusas">👚 Blusas</option>
+<option value="Jaquetas">🧥 Jaquetas</option>
+<option value="Sutiãs">👙 Sutiãs</option>
+<option value="Conjuntos">👗 Conjuntos</option>
+<option value="Óculos">🕶️ Óculos</option>
+<option value="Outras roupas">👚 Outras roupas</option>
+<option value="Delgados">Delgados</option>
+</select>
+<input type="file" id="fileInput" accept="image/*" multiple class="inp"><div id="previewWrap" class="previewWrap"></div><input id="pNome" class="inp" placeholder="Nome"><input id="pPreco" class="inp" type="number" placeholder="Preço"><input id="pOld" class="inp" type="number" placeholder="Preço antigo"><button id="btnPublicar" class="btnAdmin" onclick="publicarAuto()">📤 PUBLICAR</button></div>
 <div class="adminCard"><h3>📦 Produtos (<span id="countProd">0</span>)</h3><div id="adminList"></div></div>
 </div></div>
 <script>
